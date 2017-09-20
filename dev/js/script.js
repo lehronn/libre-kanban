@@ -22,19 +22,19 @@ $(function(){
 		function createColumn() {
 			//creating elements of column.
 			//$ in variables mean jquery elements.
-			var $column = $('<div>').addClass('column'),
-					$columnTitle = $('<h2>').addClass('column-title').text(self.name),
-					$columnCardList = $('<ul>').addClass('column-card-list'),
-					$columnDelete = $('<button>').addClass('btn-delete btn-danger').text('x'),
-					$columnAddCard = $('<button>').addClass('add-card btn-success').text('Add a card');
+			var $column = $('<div>').addClass('column');
+			var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
+			var $columnCardList = $('<ul>').addClass('column-card-list');
+			var $columnDelete = $('<button>').addClass('btn-delete btn-danger').text('x');
+			var $columnAddCard = $('<button>').addClass('add-card btn-success').text('Add a card');
 
 					//adding events
 					$columnDelete.click(function() {
-						self.remove.Column();
+						self.removeColumn();
 					});
 					//Add a note after clicking on the button:
 					$columnAddCard.click(function() {
-						self.addCard(new Card(prompt('Enter the name of card"')));
+						self.addCard(new Card(prompt('Enter the name of card')));
 					});
 					//construction column element
 					$column.append($columnTitle)
@@ -56,23 +56,23 @@ $(function(){
 
 	function Card(description) {
 		var self = this;
-
 		this.id = randomString();
 		this.description = description;
 		this.$element = createCard();
 
 		function createCard() {
-			var $card = $('<li>').addClass('card'),
-					$cardDescription = $('<p>').addClass('card-description').text(self.description);
-					$cardDelete = $('<button>').addClass('btn-delete btn-danger').text('x');
+			var $card = $('<li>').addClass('card');
+			var	$cardDescription = $('<p>').addClass('card-description').text(self.description);
+			var $cardDelete = $('<button>').addClass('btn-delete btn-danger').text('X');
 
 			$cardDelete.click(function() {
 				self.removeCard();
+			});
 
 			$card.append($cardDelete)
 				.append($cardDescription);
 				return $card;
-					});
+			}
 		}
 
 		Card.prototype = {
@@ -100,11 +100,10 @@ $(function(){
 
 		$('.create-column')
 		.click(function(){
-			var name = prompt('Enter a column name.'),
-					column = new Column(name);
+			var name = prompt('Enter a column name.');
+			var column = new Column(name);
 					board.addColumn(column);
 		});
-		}
 
 		// TWORZENIE KOLUMN
 	var todoColumn = new Column('To do');
@@ -123,4 +122,5 @@ $(function(){
 	// DODAWANIE KART DO KOLUMN
 	todoColumn.addCard(card1);
 	doingColumn.addCard(card2);
+
 });
