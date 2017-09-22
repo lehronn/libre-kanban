@@ -1,20 +1,6 @@
-// scripts.js
 $(function(){
-	console.log('DOM objects is loaded.');
-
-	function randomString() {
-		var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ',
-				str = '';
-		for (i = 0; i<10; i++) {
-			str += chars[Math.floor(Math.random() * chars.length)];
-		}
-		return str;
-	}
-
-	//constructing functions
 	function Column(name) {
 		var self = this; //for nested functions, context fix
-
 		this.id = randomString();
 		this.name = name;
 		this.$element = createColumn();
@@ -23,25 +9,25 @@ $(function(){
 			//creating elements of column.
 			//$ in variables mean jquery elements.
 			var $column = $('<div>').addClass('column');
-			var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
-			var $columnCardList = $('<ul>').addClass('column-card-list');
-			var $columnDelete = $('<button>').addClass('btn-delete btn-danger').text('x');
-			var $columnAddCard = $('<button>').addClass('add-card btn-success').text('Add a card');
+			$columnTitle = $('<h2>').addClass('column-title').text(self.name);
+			$columnCardList = $('<ul>').addClass('column-card-list');
+			$columnDelete = $('<button>').addClass('btn-delete btn-danger').text('x');
+			$columnAddCard = $('<button>').addClass('add-card btn-success').text('Add a card');
 
-					//adding events
-					$columnDelete.click(function() {
-						self.removeColumn();
-					});
-					//Add a note after clicking on the button:
-					$columnAddCard.click(function() {
-						self.addCard(new Card(prompt('Enter the name of card')));
-					});
-					//construction column element
-					$column.append($columnTitle)
+			//adding events
+			$columnDelete.click(function() {
+				self.removeColumn();
+			});
+			//Add a note after clicking on the button:
+			$columnAddCard.click(function() {
+				self.addCard(new Card(prompt('Enter the name of card')));
+			});
+			//construction column element
+			$column.append($columnTitle)
 						.append($columnDelete)
 						.append($columnAddCard)
 						.append($columnCardList);
-						return $column;
+			return $column;
 		}
 	}
 
@@ -104,6 +90,15 @@ $(function(){
 			var column = new Column(name);
 					board.addColumn(column);
 		});
+
+		function randomString() {
+			var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ',
+					str = '';
+			for (i = 0; i<10; i++) {
+				str += chars[Math.floor(Math.random() * chars.length)];
+			}
+			return str;
+		}
 
 		// TWORZENIE KOLUMN
 	var todoColumn = new Column('To do');
